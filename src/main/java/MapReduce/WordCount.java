@@ -1,6 +1,5 @@
 package MapReduce;
 
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -12,10 +11,10 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 
 /**
- * Created by hubo on 2017/12/3
+ * Created by Kris on 2019/01/26
  */
 public class WordCount {
-    private static final String OUT = "hdfs://hdp01:9000/wordcount/output/";
+    private static final String OUT = "hdfs://10.0.202.2:9000/wordcount/output/";
 
     public static class Map extends Mapper<LongWritable, Text, Text, LongWritable> {
         @Override
@@ -44,10 +43,10 @@ public class WordCount {
 
         //设置环境变量HADOOP_USER_NAME，其值是root
         //在本机调试
-        System.setProperty("HADOOP_USER_NAME", "root");
+        System.setProperty("HADOOP_USER_NAME", "hadoop");
         //读取配置文件
         Configuration conf = new Configuration();
-        conf.set("fs.defaultFS", "hdfs://192.168.56.101:9000");
+        conf.set("fs.defaultFS", "hdfs://10.0.202.2:9000");
         conf.set("yarn.resourcemanager.hostname", "hdp01");
 
         FileSystem fs = FileSystem.get(conf);
